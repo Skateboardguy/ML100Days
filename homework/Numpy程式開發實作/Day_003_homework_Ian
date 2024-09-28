@@ -1,0 +1,87 @@
+import math  
+'math.pi = {0.pi}'.format(math)
+
+
+from platform import python_version
+import os, time, socket
+import numpy as np
+
+#from time import localtime
+print('【日期時間】{0}'.format(time.strftime("%Y-%m-%d %H:%M:%S")))
+print('【工作目錄】{}'.format(os.getcwd()))
+print("【主機名稱】{1} ({0})".format(socket.gethostname(),socket.gethostbyname(socket.gethostname())))
+print("【Python】{}".format(python_version()))
+
+
+numpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)
+
+- object：必填，任何 array_like 物件
+- dtype：指定轉成陣列後的元素型態
+- copy：預設為 True，是否產生一個新的物件
+- order：指定元素在記憶體中的儲存方式
+
+np.array([1,2,3], dtype = complex)
+
+np.array({0: 123, 1: 456})
+# array({0: 123, 1: 456})
+np.array(list({0: 123, 1: 456}.items()))
+
+print(np.zeros((2, 3), dtype = int))
+# 建立由 0 組成的 2x3 陣列
+print(np.ones((2, 3)))
+# 建立由 1 組成的 2x3 陣列
+print(np.full((2, 3), 168))
+# 建立由 9 組成的 2x3 陣列
+
+print(np.zeros((2, 3)))
+#
+np.empty((2,3))
+#使用 empty() 函式則是不需要給定起始值，但是可以建立給定形狀的陣列，元素值則會隨機給定
+
+
+# np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
+print(np.arange(1,10,2)) # 不包含尾數 (固定長度等差序列)
+print(np.linspace(1,10,2, dtype=int))  # 包含尾數(固定區間等差序列)
+np.logspace(0,2) # 返回對數分佈(等比序列)
+
+from numpy.random import default_rng
+rng = default_rng()
+
+normal = rng.standard_normal((3,2)) #標準常態分佈
+random = rng.random((3,2)) #隨機分佈
+integers = rng.integers(0, 10, size=(3,2))
+print(normal)
+print(random)
+print(integers)
+
+integers = rng.integers(0, 10, size=(3,2))
+print(integers)
+
+
+[簡答題] 
+1. 請比較 np.zeros 和 np.empty 產生出來的陣列有何差異？為什麼要設計兩種方法？
+2. 在不用「整數亂數方法」的限制下，如何將包含小數的轉換整數？請將給定的 a 陣列當中的元素變成去掉小數變成整數。
+3. 承上題，怎樣可以限制整數的範圍介於 m - n 之間？請將給定的 a 陣列當中的元素的範圍調整成 m - n 之間。
+
+### 1. [簡答題] 請比較 np.zeros 和 np.empty 產生出來的陣列有何差異？為什麼要設計兩種方法？
+
+#np.zeros(): 可以依照傳入的形狀引數，建立元素全為 0的陣列
+print(np.zeros((3,3)))
+
+#np.empty(): 不避設定起始值,但是可以建立給定形狀的陣列，元素值則會隨機給定。
+print(np.empty((3,3)))
+
+### 2. 在不用「整數亂數方法」的限制下，如何將包含小數的轉換整數？請將給定的 a 陣列當中的元素變成去掉小數變成整數。
+
+
+a = rng.random((2, 3))
+print(a)
+
+b = np.array(a, dtype = 'int8')
+print(b.round())
+
+### 3. 承上題，怎樣可以限制整數的範圍介於 m - n 之間？請將給定的 a 陣列當中的元素的範圍調整成 m - n 之間。
+
+# 使用 linspace 函數，產生固定區間的陣列
+a = np.linspace(1,10,10)
+print(a)
